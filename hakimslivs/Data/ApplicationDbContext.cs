@@ -2,6 +2,7 @@ using hakimslivs.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace hakimslivs.Data
 {
@@ -48,6 +49,14 @@ namespace hakimslivs.Data
             {
                 entity.ToTable("UserTokens");
             });
+
+            modelBuilder
+                .Entity<Item>()
+                .Property(e => e.Category)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (Category)Enum.Parse(typeof(Category), v));
+
         }
     }
 }

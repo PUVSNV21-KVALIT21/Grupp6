@@ -1,0 +1,9 @@
+Category;Product;Price;Stock;Description;ImageURL
+Frukt;Banan;5.5;100;En lång gul böjd frukt;https://images.unsplash.com/photo-1528825871115-3581a5387919?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=415&q=80g
+Frukt;Päron;6;200;En grön frukt;https://images.unsplash.com/photo-1619506147154-01717498fc26?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80
+Frukt;Apelsin;5.5;5;;https://images.unsplash.com/photo-1608447779172-bcf64548de5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80
+Frukt;Äpple;4;300;Finns i flera färger;https://images.unsplash.com/photo-1630563451961-ac2ff27616ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80
+Dryck;Coca Cola;11;55;Originalet;https://images.unsplash.com/photo-1554866585-cd94860890b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80
+Dryck;Red Bull;17;0;Ger dig vingar;https://images.unsplash.com/photo-1580859297753-0b52fa0fc46e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80
+Dryck;Mountain Dew;11;22;Sött vatten;https://images.unsplash.com/photo-1632134547266-ab2cb69602a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80
+Grönsaker;Avokado;10000;15;Hella god på toast!;https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=775&q=80

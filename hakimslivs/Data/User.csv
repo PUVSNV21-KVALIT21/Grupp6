@@ -1,0 +1,3 @@
+UserName;FirstName;LastName;DOB;Street;StreetNumber;PostalCode;City;Email;Password;Role
+noodle;sfgh;sfh;2022-01-01;sdfg;2;12345;nope;noodle@example.com;Test123!;Admin
+adfg;sdfg;dfg;2010-02-22;fgh;1;12345;lol;lol@example.com;Test123!;adfgadf

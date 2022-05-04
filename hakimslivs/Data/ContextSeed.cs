@@ -1,13 +1,18 @@
 ﻿using hakimslivs.Models;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace hakimslivs.Data
 {
     public class ContextSeed
     {
-        public static async Task SeedRolesAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
         {
             //Seed Roles
             await roleManager.CreateAsync(new IdentityRole(Roles.SuperAdmin.ToString()));
@@ -32,6 +37,7 @@ namespace hakimslivs.Data
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
+
             if (userManager.Users.All(u => u.Id != defaultUser.Id))
             {
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
@@ -44,6 +50,93 @@ namespace hakimslivs.Data
                     await userManager.AddToRoleAsync(defaultUser, Roles.SuperAdmin.ToString());
                 }
 
+            }
+        }
+        public static Task InitializeProductAsync(ApplicationDbContext database)
+        {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            if (database.Items.Any())
+            {
+                return Task.CompletedTask;
+            }
+
+            string[] itemLines = File.ReadAllLines("Data/Item.csv", Encoding.GetEncoding("ISO-8859-1")).Skip(1).ToArray();
+            foreach (string line in itemLines)
+            {
+                string[] parts = line.Split(';');
+
+                Category? category;
+                try
+                {
+                    category = (Category)Enum.Parse(typeof(Category), parts[0]);
+                }
+                catch
+                {
+                    category = null;
+                }
+
+                string product = parts[1];
+                decimal price = decimal.Parse(parts[2]);
+                int stock = int.Parse(parts[3]);
+                string description = parts[4];
+                string imageURL = parts[5];
+
+                Item i = new Item
+                {
+                    Category = category,
+                    Product = product,
+                    Price = price,
+                    Stock = stock,
+                    Description = description,
+                    ImageURL = imageURL
+                };
+
+                database.Items.Add(i);
+            }
+
+            database.SaveChanges();
+            return Task.CompletedTask;
+        }
+        public static async Task InitializeUserAsync(ApplicationDbContext database, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            if (database.Users.Any())
+            {
+                return;
+            }
+            string[] userLines = File.ReadAllLines("Data/User.csv", Encoding.GetEncoding("ISO-8859-1")).Skip(1).ToArray();
+
+            foreach (string line in userLines)
+            {
+                string[] parts = line.Split(';');
+
+                string password = parts[9];
+                string role = parts[10];
+
+                ApplicationUser user = new ApplicationUser
+                {
+                    UserName = parts[0],
+                    FirstName = parts[1],
+                    LastName = parts[2],
+                    DOB = DateTime.Parse(parts[3]),
+                    Street = parts[4],
+                    StreetNumber = int.Parse(parts[5]),
+                    PostalCode = int.Parse(parts[6]),
+                    City = parts[7],
+                    Email = parts[8],
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true
+                };
+
+                await userManager.CreateAsync(user, password);
+                if (role == "Admin")
+                {
+                    await userManager.AddToRoleAsync(user, Roles.Admin.ToString());
+                }
+                else
+                {
+                    await userManager.AddToRoleAsync(user, Roles.Basic.ToString());
+                }
             }
         }
     }

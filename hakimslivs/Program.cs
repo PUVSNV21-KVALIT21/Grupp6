@@ -28,8 +28,10 @@ namespace hakimslivs
                     context.Database.Migrate();
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    await ContextSeed.SeedRolesAsync(userManager, roleManager);
+                    await ContextSeed.SeedRolesAsync(roleManager);
+                    await ContextSeed.InitializeUserAsync(context, userManager, roleManager);
                     await ContextSeed.SeedSuperAdminAsync(userManager, roleManager);
+                    await ContextSeed.InitializeProductAsync(context);
 
                 }
                 catch (Exception ex)
