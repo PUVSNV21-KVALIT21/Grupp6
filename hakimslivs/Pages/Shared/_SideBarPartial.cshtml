@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using hakimslivs.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model hakimslivs.Pages.IndexModel
+
+
+<div class="navbar navbar-collapse collapse d-sm-inline-flex align-content-start col-2">
+    <ul class="navbar-nav flex-grow-1">
+        @foreach (var category in Model.Categories)
+        {
+            <a asp-page="./Index"
+                asp-route-currentCategory="@category.Name">
+                @category.Name
+            </a>        
+        }
+    </ul>
+</div>

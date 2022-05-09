@@ -15,6 +15,7 @@ namespace hakimslivs.Data
         public DbSet<Item> Items { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ItemQuantity> ItemQuantities { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<ManageUserRolesViewModel> ManageUserRolesViewModel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -51,11 +52,9 @@ namespace hakimslivs.Data
             });
 
             modelBuilder
-                .Entity<Item>()
-                .Property(e => e.Category)
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (Category)Enum.Parse(typeof(Category), v));
+                .Entity<Category>()
+                .HasIndex(e => e.Name)
+                .IsUnique();
 
         }
     }

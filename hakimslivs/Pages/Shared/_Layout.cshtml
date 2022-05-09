@@ -6,39 +6,64 @@
     <title>Hakims Livs</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">   
 </head>
 <body>
     <header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <nav class="navbar navbar-brand navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <div>Admin Panel</div>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-start">
+                        @if (User.Identity.IsAuthenticated)
+                            {
+                                @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+                                {
+                                    <a class="nav-link" asp-area="" asp-page="/Admin/RoleManager/Index">Role Manager</a>
+                                    <a class="nav-link" asp-area="" asp-page="/Admin/UserRoles/Index">User Roles</a>
+                                }
+                            }
+                    </div>
+                </div>
+            </nav>
+        }
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">hakimslivs</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Hakims Livs</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-start">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-primary my-2 my-sm-0 mr-2" type="submit">Search</button>
+                    </form>
+                    @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+                            {
+                            }
+                            else if (User.IsInRole("Basic"))
+                            {
+                                <a class="nav-link" asp-area="" asp-page="">Basic Role</a>
+                            }
+                        }
                     <partial name="_LoginPartial" />
+                    <button type="button" class="btn btn-outline-primary my-2 my-sm-0 mr-2"><span class="bi bi-cart black-color"></span></button>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        @RenderBody()
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - hakimslivs - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2022 - Hakims Livs - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

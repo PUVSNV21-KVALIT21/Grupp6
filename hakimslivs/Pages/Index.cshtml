@@ -4,23 +4,26 @@
 @{
     ViewData["Title"] = "Välkommen till Hakims Livs!";
 }
-
+<div class="container">
+<div class="row">
+<partial name="_SideBarPartial" />
+<div class="justify-content-center col-10">
 <h1 class="title">@ViewData["Title"]</h1>
 <div class="product-container">
-    @foreach (var item in Model.Item)
+    @foreach (var item in Model.Items)
     {
         <div class="card">
             <img class="card-img" src="@item.ImageURL" alt="Product image">
             <div class="card-body">
                 <h4 class="card-title">@item.Product</h4>
                 <div class="box">
-                    @if (String.IsNullOrEmpty(item.Category.ToString()))
+                    @if (item.Category == null)
                     {
                         <p class="card-text na">Ingen kategori tillgänglig</p>
                     }
                     else
                     {
-                        <a href="#" class="card-text">@item.Category.ToString()</a>
+                        <a href="#" class="card-text">@item.Category.Name</a>
                     }
                     @if (String.IsNullOrEmpty(item.Description))
                     {
@@ -59,4 +62,7 @@
         </div>
     }
 
+</div>
+</div>
+</div>
 </div>

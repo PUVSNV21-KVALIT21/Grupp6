@@ -59,16 +59,28 @@ namespace hakimslivs.Data
             {
                 return Task.CompletedTask;
             }
+            
+            string[] categoryLines = File.ReadAllLines("Data/Category.csv", Encoding.GetEncoding("ISO-8859-1")).Skip(1).ToArray();
+            foreach (var category in categoryLines)
+            {
+                Category c = new Category
+                {
+                    Name = category
+                };
+                database.Categories.Add(c);
+            }
+
+            database.SaveChanges();
 
             string[] itemLines = File.ReadAllLines("Data/Item.csv", Encoding.GetEncoding("ISO-8859-1")).Skip(1).ToArray();
             foreach (string line in itemLines)
             {
                 string[] parts = line.Split(';');
 
-                Category? category;
-                try
+                Category category = new();
+                try 
                 {
-                    category = (Category)Enum.Parse(typeof(Category), parts[0]);
+                    category = database.Categories.First(c => c.Name == parts[0]);
                 }
                 catch
                 {

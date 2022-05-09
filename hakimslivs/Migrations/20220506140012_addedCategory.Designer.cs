@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using hakimslivs.Data;
 
 namespace hakimslivs.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220506140012_addedCategory")]
+    partial class addedCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,7 +409,7 @@ namespace hakimslivs.Migrations
             modelBuilder.Entity("hakimslivs.Models.Item", b =>
                 {
                     b.HasOne("hakimslivs.Models.Category", "Category")
-                        .WithMany("Items")
+                        .WithMany()
                         .HasForeignKey("CategoryName");
 
                     b.Navigation("Category");
@@ -439,11 +441,6 @@ namespace hakimslivs.Migrations
                         .HasForeignKey("AspNetUserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("hakimslivs.Models.Category", b =>
-                {
-                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

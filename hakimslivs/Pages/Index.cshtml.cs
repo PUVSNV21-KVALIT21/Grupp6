@@ -19,11 +19,21 @@ namespace hakimslivs.Pages
             _context = context;
         }
 
-        public IList<Item> Item { get;set; }
+        public IList<Item> Items { get;set; }
+        public IList<Category> Categories { get;set; }
+        public string CurrentCategory { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string currentCategory)
         {
-            Item = await _context.Items.ToListAsync();
+            if (!String.IsNullOrEmpty(currentCategory))
+            {
+                Items = await _context.Items.Include(i => i.Category).Where(i => i.Category.Name == currentCategory).ToListAsync();
+            }
+            else
+            {
+                Items = await _context.Items.Include(i => i.Category).ToListAsync();
+            }
+            Categories = await _context.Categories.ToListAsync();
         }
     }
 }
