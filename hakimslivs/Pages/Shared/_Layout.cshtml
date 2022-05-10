@@ -37,21 +37,13 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-start">
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-primary my-2 my-sm-0 mr-2" type="submit">Search</button>
+                        <div class="search-bar">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Sök" aria-label="Search">
+                            <button class="btn btn-outline-primary my-2 my-sm-0 mr-2 search" type="submit"><i class="bi bi-search"></i></button>
+                        </div>
                     </form>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
-                        {
-                        }
-                        else if (User.IsInRole("Basic"))
-                        {
-                            <a class="nav-link" asp-area="" asp-page="">Basic Role</a>
-                        }
-                    }
                     <partial name="_LoginPartial" />
-                    <button type="button" class="btn btn-outline-primary my-2 my-sm-0 mr-2"><span class="bi bi-cart black-color"></span></button>
+                    <button type="button" class="btn btn-outline-primary my-2 my-sm-0 mr-2"><span class="bi bi-cart black-color"></span><span class="menu-text"> Varukorg</span></button>
                 </div>
             </div>
         </nav>

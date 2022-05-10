@@ -114,6 +114,54 @@ body {
     margin-right: 24px;
     text-align: center;
 }
+.navbar {
+    background-color: white;
+}
+.menu-text, .side-menu-main {
+    display: none;
+}
+.side-menu {
+    padding: 12px;
+}
+.search-bar {
+    display: inline-flex;
+    align-items: center;
+}
+@media screen and (max-width: 990px) {
+    .navbar-collapse {
+        padding-right: 0;
+        padding-left: 2px;
+    }
+    .side-menu {
+        padding: 6px;
+    }
+    .side-menu-name {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 990px) {
+    .side-menu-name {
+        font-size: 12px;
+    }
+}
+/*Breaking point for hamburger menu*/
+@media screen and (max-width: 575px) {
+    .menu-text {
+        display: inline;
+    }
+    .search {
+        margin-left: 6px;
+    }
+    .side-menu-left {
+        display: none;
+    }
+    .side-menu-main {
+        display: block;
+    }
+    .side-menu-main .fa {
+        font-size: 18px;
+    }
+}
 
 @media screen and (max-width: 540px) {
     .category-name {
