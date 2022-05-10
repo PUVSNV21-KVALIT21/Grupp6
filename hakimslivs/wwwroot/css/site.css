@@ -61,6 +61,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+    background-color:whitesmoke;
 }
 .footer {
   position: absolute;
@@ -68,4 +69,105 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 16px 16px;
+}
+.card-img {
+    object-fit: cover;
+    height: 200px;
+}
+.na {
+    font-style: italic;
+    color: gray;
+}
+.box {
+    height: 120px;
+}
+.product-manager-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 16px 16px;
+}
+.product-manager {
+    padding-bottom: 12px;
+}
+.form-price {
+    display: inline-flex;
+}
+.form-price .form-group:first-child {
+    padding-right: 4px;
+}
+
+.fa {
+    min-width: 20px;
+}
+.product-manager-categories {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 24px;
+    margin-right: 24px;
+    text-align: center;
+}
+.navbar {
+    background-color: white;
+}
+.menu-text, .side-menu-main {
+    display: none;
+}
+.side-menu {
+    padding: 12px;
+}
+.search-bar {
+    display: inline-flex;
+    align-items: center;
+}
+@media screen and (max-width: 990px) {
+    .navbar-collapse {
+        padding-right: 0;
+        padding-left: 2px;
+    }
+    .side-menu {
+        padding: 6px;
+    }
+    .side-menu-name {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 990px) {
+    .side-menu-name {
+        font-size: 12px;
+    }
+}
+/*Breaking point for hamburger menu*/
+@media screen and (max-width: 575px) {
+    .menu-text {
+        display: inline;
+    }
+    .search {
+        margin-left: 6px;
+    }
+    .side-menu-left {
+        display: none;
+    }
+    .side-menu-main {
+        display: block;
+    }
+    .side-menu-main .fa {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .category-name {
+        display: none;
+    }
+    .product-manager-categories {
+        font-size: 18px;
+    }
 }

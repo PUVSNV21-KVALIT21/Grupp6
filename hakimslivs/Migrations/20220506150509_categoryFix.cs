@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace hakimslivs.Data.Migrations
+namespace hakimslivs.Migrations
 {
-    public partial class first : Migration
+    public partial class categoryFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

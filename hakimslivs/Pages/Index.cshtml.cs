@@ -1,25 +1,39 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using hakimslivs.Data;
+using hakimslivs.Models;
 
 namespace hakimslivs.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly hakimslivs.Data.ApplicationDbContext _context;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(hakimslivs.Data.ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public void OnGet()
-        {
+        public IList<Item> Items { get;set; }
+        public IList<Category> Categories { get;set; }
+        public string CurrentCategory { get; set; }
 
+        public async Task OnGetAsync(string currentCategory)
+        {
+            if (!String.IsNullOrEmpty(currentCategory))
+            {
+                Items = await _context.Items.Include(i => i.Category).Where(i => i.Category.Name == currentCategory).ToListAsync();
+            }
+            else
+            {
+                Items = await _context.Items.Include(i => i.Category).ToListAsync();
+            }
+            Categories = await _context.Categories.ToListAsync();
         }
     }
 }
