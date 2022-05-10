@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using hakimslivs.Data;
 
 namespace hakimslivs.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220506133248_fix")]
+    partial class fix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,22 +250,6 @@ namespace hakimslivs.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("hakimslivs.Models.Category", b =>
-                {
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Name");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("hakimslivs.Models.Item", b =>
                 {
                     b.Property<int>("ID")
@@ -271,8 +257,8 @@ namespace hakimslivs.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -293,8 +279,6 @@ namespace hakimslivs.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("CategoryName");
 
                     b.ToTable("Items");
                 });
@@ -409,15 +393,6 @@ namespace hakimslivs.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("hakimslivs.Models.Item", b =>
-                {
-                    b.HasOne("hakimslivs.Models.Category", "Category")
-                        .WithMany("Items")
-                        .HasForeignKey("CategoryName");
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("hakimslivs.Models.ItemQuantity", b =>
                 {
                     b.HasOne("hakimslivs.Models.Item", "Item")
@@ -444,11 +419,6 @@ namespace hakimslivs.Migrations
                         .HasForeignKey("AspNetUserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("hakimslivs.Models.Category", b =>
-                {
-                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

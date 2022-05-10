@@ -6,27 +6,27 @@
     <title>Hakims Livs</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <script src="https://kit.fontawesome.com/0ed3f70b31.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         @if (User.Identity.IsAuthenticated)
         {
-            <nav class="navbar navbar-brand navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <div>Admin Panel</div>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-start">
-                        @if (User.Identity.IsAuthenticated)
-                            {
-                                @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
-                                {
-                                    <a class="nav-link" asp-area="" asp-page="/Admin/RoleManager/Index">Role Manager</a>
-                                    <a class="nav-link" asp-area="" asp-page="/Admin/UserRoles/Index">User Roles</a>
-                                }
-                            }
+            if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+            {
+                <nav class="navbar navbar-brand navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                    <div class="container">
+                        <div>Admin Panel</div>
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-start">
+                            <a class="nav-link" asp-area="" asp-page="/Admin/RoleManager/Index">Role Manager</a>
+                            <a class="nav-link" asp-area="" asp-page="/Admin/UserRoles/Index">User Roles</a>
+                            <a class="nav-link" asp-area="" asp-page="/Admin/ProductManager/Index">Product Manager</a>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            }
+
         }
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -41,15 +41,15 @@
                         <button class="btn btn-outline-primary my-2 my-sm-0 mr-2" type="submit">Search</button>
                     </form>
                     @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
                         {
-                            @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
-                            {
-                            }
-                            else if (User.IsInRole("Basic"))
-                            {
-                                <a class="nav-link" asp-area="" asp-page="">Basic Role</a>
-                            }
                         }
+                        else if (User.IsInRole("Basic"))
+                        {
+                            <a class="nav-link" asp-area="" asp-page="">Basic Role</a>
+                        }
+                    }
                     <partial name="_LoginPartial" />
                     <button type="button" class="btn btn-outline-primary my-2 my-sm-0 mr-2"><span class="bi bi-cart black-color"></span></button>
                 </div>

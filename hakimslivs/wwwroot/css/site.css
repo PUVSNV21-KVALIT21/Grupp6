@@ -61,6 +61,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+    background-color:whitesmoke;
 }
 .footer {
   position: absolute;
@@ -86,4 +87,39 @@ body {
 }
 .box {
     height: 120px;
+}
+.product-manager-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 16px 16px;
+}
+.product-manager {
+    padding-bottom: 12px;
+}
+.form-price {
+    display: inline-flex;
+}
+.form-price .form-group:first-child {
+    padding-right: 4px;
+}
+
+.fa {
+    min-width: 20px;
+}
+.product-manager-categories {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 24px;
+    margin-right: 24px;
+    text-align: center;
+}
+
+@media screen and (max-width: 540px) {
+    .category-name {
+        display: none;
+    }
+    .product-manager-categories {
+        font-size: 18px;
+    }
 }

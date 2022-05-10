@@ -4,65 +4,64 @@
 @{
     ViewData["Title"] = "Välkommen till Hakims Livs!";
 }
-<div class="container">
+
 <div class="row">
-<partial name="_SideBarPartial" />
-<div class="justify-content-center col-10">
-<h1 class="title">@ViewData["Title"]</h1>
-<div class="product-container">
-    @foreach (var item in Model.Items)
-    {
-        <div class="card">
-            <img class="card-img" src="@item.ImageURL" alt="Product image">
-            <div class="card-body">
-                <h4 class="card-title">@item.Product</h4>
-                <div class="box">
-                    @if (item.Category == null)
+    <partial name="_SideBarPartial" />
+    <div class="justify-content-center col-10">
+        <h1 class="title">@ViewData["Title"]</h1>
+        <div class="product-container">
+            @foreach (var item in Model.Items)
+            {
+                <div class="card">
+                    <img class="card-img" src="@item.ImageURL" alt="Product image">
+                    <div class="card-body">
+                        <h4 class="card-title">@item.Product</h4>
+                        <div class="box">
+                            @if (item.Category == null)
+                            {
+                                <p class="card-text na">Ingen kategori tillgänglig</p>
+                            }
+                            else
+                            {
+                                <a asp-page="./Index" asp-route-currentCategory="@item.Category.Name" class="card-text"> <i class="fa @item.Category.Icon"></i>@item.Category.Name</a>
+                            }
+                            @if (String.IsNullOrEmpty(item.Description))
+                            {
+                                <p class="card-text na">Ingen beskrivning tillgänglig</p>
+                            }
+                            else
+                            {
+                                <p class="card-text">@item.Description</p>
+                            }
+                        </div>
+
+                        @if (item.Stock >= 10)
+                        {
+                            <p class="card-text">I Lager 🟢</p>
+                        }
+                        else if (item.Stock < 10 && item.Stock > 0)
+                        {
+                            <p class="card-text">Få i lager 🟡</p>
+                        }
+                        else
+                        {
+                            <p class="card-text">Slut 🔴</p>
+                        }
+
+                        <h5 class="card-title">@item.Price kr</h5>
+                    </div>
+                    @if (item.Stock <= 0)
                     {
-                        <p class="card-text na">Ingen kategori tillgänglig</p>
+                        <button class="btn btn-primary" disabled>Slut</button>
                     }
                     else
                     {
-                        <a href="#" class="card-text">@item.Category.Name</a>
+                        <button class="btn btn-primary">Köp</button>
                     }
-                    @if (String.IsNullOrEmpty(item.Description))
-                    {
-                        <p class="card-text na">Ingen beskrivning tillgänglig</p>
-                    }
-                    else
-                    {
-                        <p class="card-text">@item.Description</p>
-                    }
+
                 </div>
-
-                @if (item.Stock >= 10)
-                {
-                    <p class="card-text">I Lager 🟢</p>
-                }
-                else if (item.Stock < 10 && item.Stock > 0)
-                {
-                    <p class="card-text">Få i lager 🟡</p>
-                }
-                else
-                {
-                    <p class="card-text">Slut 🔴</p>
-                }
-
-                <h5 class="card-title">@item.Price kr</h5>
-            </div>
-            @if (item.Stock <= 0)
-            {
-                <button class="btn btn-primary" disabled>Slut</button>
-            }
-            else
-            {
-                <button class="btn btn-primary">Köp</button>
             }
 
         </div>
-    }
-
-</div>
-</div>
-</div>
+    </div>
 </div>
