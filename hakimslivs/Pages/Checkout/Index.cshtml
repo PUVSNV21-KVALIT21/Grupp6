@@ -1,0 +1,48 @@
+﻿@page
+@model hakimslivs.Pages.Checkout.IndexModel
+@{
+}
+
+
+<h1>Utcheckning</h1>
+<table class="table table-striped">
+    <tr>
+        <td>
+            <strong>Namn: </strong>
+            @Model.IdentityUser.FirstName
+            @Model.IdentityUser.LastName
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Användarnamn: </strong>
+
+            @Model.IdentityUser.UserName
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Epost: </strong>
+            @Model.IdentityUser.Email
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Leveransadress: </strong>
+            @Model.IdentityUser.Street
+            @Model.IdentityUser.StreetNumber,
+            @Model.IdentityUser.PostalCode
+            @Model.IdentityUser.City
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Totalsumma:</strong>
+            1234 kr 
+        </td>
+    </tr>
+    
+
+</table>
+    <button type="button" class="btn btn-primary btn-lg btn-block">Bekräfta order</button>
+    <a type="button" href="javascript:history.go(-1)" class="btn btn-secondary btn-lg btn-block">Tillbaka till varukorg</a>

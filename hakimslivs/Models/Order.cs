@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,5 +17,7 @@ namespace hakimslivs.Models
         [ForeignKey("AspNetUserId")]
         [Display(Name = "CustomerID")]
         public ApplicationUser User { get; set; }
+        public OrderStatus OrderStatus { get; set; }
+        public bool PaymentOk { get; set; }
     }
 }

@@ -31,7 +31,6 @@ namespace hakimslivs
                     await ContextSeed.InitializeUserAsync(context, userManager, roleManager);
                     await ContextSeed.SeedSuperAdminAsync(userManager, roleManager);
                     await ContextSeed.InitializeProductAsync(context);
-
                 }
                 catch (Exception ex)
                 {

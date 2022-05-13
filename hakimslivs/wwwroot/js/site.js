@@ -1,41 +1,56 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
-
-let shoppingCart = new Map();
+﻿let shoppingCart = readLocalStorage() || new Map();
 let shoppingCartElt = document.getElementsByClassName('bi-cart')[0];
 
-
+readLocalStorage();
 allAddButtons = document.getElementsByClassName('add-to-cart');
 
 function registerHandlers() {
     for (const addButton of allAddButtons) {
         addButton.onclick = event => {
-            productClicked = addButton.name;
+            let productClicked = addButton.name;
             if (shoppingCart.has(productClicked)) {
-                currentQuantity = shoppingCart.get(productClicked);
-                shoppingCart.set(productClicked, currentQuantity + 1)
+                let currentQuantity = shoppingCart.get(productClicked);
+                shoppingCart.set(productClicked, currentQuantity + 1);
             }
             else {
-                shoppingCart.set(productClicked, 1)
+                shoppingCart.set(productClicked, 1);
             }
-            if (shoppingCart.size > 0) {
-                shoppingCartElt.style.color = "red";
-            }
-            console.log(productClicked + " was clicked");
-            console.log(shoppingCart);
+
+            writeLocalStorage();
+            numberOfItemsInCart();
         }
     }
 };
 
+function writeLocalStorage() {
+    localStorage.setItem('shopping-cart', JSON.stringify(Object.fromEntries(shoppingCart)));
+}
 
+function readLocalStorage() {
+    let cartStorage = JSON.parse(localStorage.getItem('shopping-cart'));
+
+    if (cartStorage != null) {
+        return new Map(Object.entries(cartStorage));
+    };
+}
+
+function numberOfItemsInCart() {
+    let total = 0;
+
+    var mapIter = shoppingCart.values();
+    shoppingCart.forEach(value => {
+        total += mapIter.next().value;
+    });
+    let number = document.getElementById("amount");
+    if (total !== 0) {
+        number.textContent = total + " ";
+        amount.style.color = "green";
+    }
+
+    if (shoppingCart.size > 0) {
+        shoppingCartElt.style.color = "green";
+    }
+}
 
 registerHandlers();
-
-
-
-
-
-
+numberOfItemsInCart();

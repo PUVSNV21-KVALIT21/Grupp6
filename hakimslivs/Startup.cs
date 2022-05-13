@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Globalization;
-using System.IO;
 
 namespace hakimslivs
 {
@@ -27,53 +26,53 @@ namespace hakimslivs
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<RequestLocalizationOptions>(opt =>
-            {
-                CultureInfo[] cultures = {
+            _ = services.Configure<RequestLocalizationOptions>(opt =>
+              {
+                  CultureInfo[] cultures = {
                 new CultureInfo("sv-SE"),
                 new CultureInfo("en-GB"),
-                };
+                  };
 
-                cultures[0].NumberFormat = cultures[1].NumberFormat;
+                  cultures[0].NumberFormat = cultures[1].NumberFormat;
 
-                opt.DefaultRequestCulture = new RequestCulture(cultures[0]);
-                opt.SupportedCultures = cultures;
-                opt.SupportedUICultures = cultures;
-            });
+                  opt.DefaultRequestCulture = new RequestCulture(cultures[0]);
+                  opt.SupportedCultures = cultures;
+                  opt.SupportedUICultures = cultures;
+              });
             var connString = GetSqlConnectionString("defaultConnection");
-            File.WriteAllText("log.txt", connString);
+
             if (String.IsNullOrEmpty(connString))
             {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(
-                        Configuration.GetConnectionString("DefaultConnection")));
+                _ = services.AddDbContext<ApplicationDbContext>(options =>
+                      options.UseSqlServer(
+                          Configuration.GetConnectionString("DefaultConnection")));
             }
             else
             {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(connString));
+                _ = services.AddDbContext<ApplicationDbContext>(options =>
+                      options.UseSqlServer(connString));
             }
-
-            services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            _ = services.AddDatabaseDeveloperPageExceptionFilter();
+            _ = services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-            services.Configure<ForwardedHeadersOptions>(options =>
+            //_ = services.AddControllers();
+            _ = services.AddControllersWithViews();
+            _ = services.AddRazorPages();
+            _ = services.Configure<ForwardedHeadersOptions>(options =>
             {
-                options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
+                _ = options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
             });
 
-            services.AddMvc()
+            _ = services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
                     options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
                     options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
                 });
 
-            services.Configure<IdentityOptions>(options =>
+            _ = services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
                 options.Password.RequireDigit = true;
@@ -94,7 +93,7 @@ namespace hakimslivs
                 options.User.RequireUniqueEmail = true;
             });
 
-            services.ConfigureApplicationCookie(options =>
+            _ = services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
@@ -118,30 +117,31 @@ namespace hakimslivs
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseMigrationsEndPoint();
+            _ = app.UseMigrationsEndPoint();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                _ = app.UseDeveloperExceptionPage();
                 //app.UseMigrationsEndPoint();
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                _ = app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                _ = app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            _ = app.UseHttpsRedirection();
+            _ = app.UseStaticFiles();
+            _ = app.UseDefaultFiles();
 
-            app.UseRouting();
+            _ = app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            _ = app.UseAuthentication();
+            _ = app.UseAuthorization();
 
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            _ = app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-            app.UseEndpoints(endpoints =>
+            _ = app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();

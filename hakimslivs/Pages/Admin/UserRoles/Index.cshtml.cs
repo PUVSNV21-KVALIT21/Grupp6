@@ -27,7 +27,7 @@ namespace hakimslivs.Pages.Admin.UserRoles
 
         public async Task<IActionResult> OnGetAsync()
         {
-            if (User.IsInRole("SuperAdmin, Admin"))
+            if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
             {
                 var users = await _userManager.Users.ToListAsync();
                 UserRolesViewModel = new List<UserRolesViewModel>();

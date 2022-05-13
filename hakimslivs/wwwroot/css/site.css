@@ -1,6 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@900&display=swap');
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -61,7 +61,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-    background-color:whitesmoke;
+  background-color:whitesmoke;
 }
 .footer {
   position: absolute;
@@ -71,6 +71,11 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+#logo {
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 28px;
+    color: #0366d6;
+}
 
 .product-container {
     display: grid;
@@ -127,6 +132,16 @@ body {
     display: inline-flex;
     align-items: center;
 }
+
+.cart-btns-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cart-btns button {
+    padding: 3px;
+}
+
 @media screen and (max-width: 990px) {
     .navbar-collapse {
         padding-right: 0;
@@ -136,14 +151,10 @@ body {
         padding: 6px;
     }
     .side-menu-name {
-        font-size: 14px;
-    }
-}
-@media screen and (max-width: 990px) {
-    .side-menu-name {
         font-size: 12px;
     }
 }
+
 /*Breaking point for hamburger menu*/
 @media screen and (max-width: 575px) {
     .menu-text {

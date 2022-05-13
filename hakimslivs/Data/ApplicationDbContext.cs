@@ -14,6 +14,7 @@ namespace hakimslivs.Data
         }
         public DbSet<Item> Items { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderStatus> OrdersStatuses { get; set; }
         public DbSet<ItemQuantity> ItemQuantities { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ManageUserRolesViewModel> ManageUserRolesViewModel { get; set; }

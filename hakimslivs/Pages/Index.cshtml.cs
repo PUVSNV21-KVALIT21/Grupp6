@@ -12,9 +12,9 @@ namespace hakimslivs.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly hakimslivs.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public IndexModel(hakimslivs.Data.ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext context)
         {
             _context = context;
         }

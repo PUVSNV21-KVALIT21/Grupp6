@@ -1,0 +1,73 @@
+﻿@page
+@model hakimslivs.Pages.Admin.OrderManager.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Order Date
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            Payment Status
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.PaymentOk)
+        </dd>
+        <dt class="col-sm-2">
+           Order Status
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.OrderStatus)
+        </dd>
+    </dl>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Product)
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price á
+            </th>
+            <th>
+                Total
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var iq in Model.ItemQuantityList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => iq.Item.Product)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => iq.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => iq.Item.Price)
+            </td>
+            <td>
+                @(iq.Item.Price * iq.Quantity)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Order.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,50 @@
+﻿@page
+@model hakimslivs.Pages.Admin.OrderManager.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].OrderDate)
+            </th>
+            <th>
+                Customer
+            </th>
+            <th>
+                Payment Status
+            </th>
+            <th>
+                Order Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var order in Model.Order) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => order.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.User.FirstName) + @Html.DisplayFor(modelItem => order.User.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.PaymentOk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.OrderStatus)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@order.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@order.ID">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

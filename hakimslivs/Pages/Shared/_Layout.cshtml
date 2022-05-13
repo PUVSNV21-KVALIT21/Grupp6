@@ -22,6 +22,7 @@
                             <a class="nav-link" asp-area="" asp-page="/Admin/RoleManager/Index">Role Manager</a>
                             <a class="nav-link" asp-area="" asp-page="/Admin/UserRoles/Index">User Roles</a>
                             <a class="nav-link" asp-area="" asp-page="/Admin/ProductManager/Index">Product Manager</a>
+                            <a class="nav-link" asp-area="" asp-page="/Admin/OrderManager/Index">Order Manager</a>
                         </div>
                     </div>
                 </nav>
@@ -30,7 +31,7 @@
         }
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Hakims Livs</a>
+                <a class="navbar-brand" id="logo" asp-area="" asp-page="/Index">Hakims Livs</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -43,7 +44,8 @@
                         </div>
                     </form>
                     <partial name="_LoginPartial" />
-                    <button type="button" class="btn btn-outline-primary my-2 my-sm-0 mr-2"><span class="bi bi-cart black-color"></span><span class="menu-text"> Varukorg</span></button>
+                    <a asp-page="/Cart" class="btn btn-outline-primary my-2 my-sm-0 mr-2"><span id="amount"></span><span class="bi bi-cart black-color"></span><span class="menu-text"> Varukorg</span></a>
+                
                 </div>
             </div>
         </nav>
