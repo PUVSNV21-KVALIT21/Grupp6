@@ -146,7 +146,9 @@ body {
     margin-top: 20px;
     background: #eee;
 }
-
+a:hover.link-btn {
+    text-decoration: none;
+}
 /*Invoice*/
 .test {
     display: flex;
