@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace hakimslivs.Pages
@@ -34,7 +35,7 @@ namespace hakimslivs.Pages
             Roles = await _roleManager.Roles.ToListAsync();
             var UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             IdentityUser = await _userManager.FindByIdAsync(UserID);
-
+            Thread.Sleep(5000);
             Order = _context.Orders.Include(o => o.User).Where(o => o.User == IdentityUser).OrderByDescending(o => o.OrderDate).First();
             if (Order == null)
             {

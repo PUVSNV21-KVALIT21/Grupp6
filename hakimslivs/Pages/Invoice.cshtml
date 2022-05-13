@@ -3,9 +3,11 @@
 
 @{
 }
-<script src="~/js/invoice.js"></script>
 
-<div class="container bootstrap snippets bootdeys">
+<script src="~/js/invoice.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div id="element-to-print" class="container bootstrap snippets bootdeys">
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default invoice" id="invoice">
@@ -97,8 +99,8 @@
                         <div class="col-xs-6 margintop">
                             <p class="lead marginbottom" id="logo">Tack för din beställning!</p>
 
-                            <button class="btn btn-success" id="invoice-print"><i class="fa fa-print"></i> Skriv Ut</button>
-                            <button class="btn btn-danger"><i class="fa fa-envelope-o"></i> Maila</button>
+                            <button class="btn btn-success" onclick="window.print();return false;" id="invoice-print"><i class="fa fa-print"></i> Skriv Ut</button>
+                            <button class="btn btn-danger" onclick="GetPDF()"><i class="fa fa-solid fa-file-pdf"></i> PDF</button>
                         </div>
                         <div class="col-xs-6 text-right pull-right invoice-total">
                             <p>Summa: <span>@Model.TotalSum</span>kr</p>
