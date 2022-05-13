@@ -48,6 +48,10 @@ namespace hakimslivs.Controllers
             if (jObject != null)
             {
                 items = GetListWithItems(jObject);
+                if (items.Count == 0)
+                {
+                    return success;
+                }
 
                 OrderStatus status = context.OrdersStatuses.First(o => o.OrderStatusName == "Mottagen");
 
@@ -76,8 +80,6 @@ namespace hakimslivs.Controllers
                     context.ItemQuantities.Add(iq);
                 }
                 await context.SaveChangesAsync();
-                // Om allt gått bra sätt sucess till true och javascriptet
-                // får rensa kundkorgen!
                 success = true;
             }
 

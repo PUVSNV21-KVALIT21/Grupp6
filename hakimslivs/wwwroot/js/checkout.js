@@ -38,7 +38,7 @@ function PlaceOrder() {
         contentType: "application/json; charset=utf-8",
         success: function (result) {
             console.log(result);
-            //GetTotalSum(result);
+            console.log("nooodles");
         },
         error: function (xhr, status, error) {
             console.log('Error : ' + xhr.responseText);

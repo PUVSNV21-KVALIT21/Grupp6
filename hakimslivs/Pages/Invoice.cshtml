@@ -1,0 +1,114 @@
+﻿@page
+@model hakimslivs.Pages.InvoiceModel
+
+@{
+}
+<script src="~/js/invoice.js"></script>
+
+<div class="container bootstrap snippets bootdeys">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default invoice" id="invoice">
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-sm-6 top-left" id="logo">
+                            <h1>Hakims Livs</h1>
+                        </div>
+
+                        <div class="col-sm-6 top-right">
+                            <h3 class="marginright">Faktura</h3>
+                            <span class="marginright date"></span>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="row test">
+
+                        <div class="col-xs-4 from">
+                            <p class="lead marginbottom payment-info">Från: Hakims Livs</p>
+                            <p>Livetsgata 1</p>
+                            <p>123 45, Staden</p>
+                            <p>Sverige</p>
+                            <p>Telefon: 0730 - 111 222</p>
+                            <p>Email: kontakt@hakimslivs.se</p>
+                        </div>
+
+                        <div class="col-xs-4 to">
+                            <p class="lead marginbottom payment-info">Till: <span>@Model.IdentityUser.FirstName @Model.IdentityUser.LastName</span></p>
+                            <p>@Model.IdentityUser.Street @Model.IdentityUser.StreetNumber</p>
+                            <p>@Model.IdentityUser.PostalCode, @Model.IdentityUser.City</p>
+                            <p>Sverige</p>
+                            @if (@Model.IdentityUser.PhoneNumber == null)
+                            {
+                                <p>Telefon: <span class="na">Inte tillgängligt</span></p>
+                            }
+                            else
+                            {
+                                <p>Telefon: @Model.IdentityUser.PhoneNumber</p>
+                            }
+
+                            <p>Email: <span>@Model.IdentityUser.Email</span></p>
+
+                        </div>
+
+                        <div class="col-xs-4 text-right payment-details">
+                            <p class="lead marginbottom payment-info">Betalningsuppgifter</p>
+                            <p>Datum: <span class="date2"></span></p>
+                            <p>Bankgiro: 1234-567 </p>
+                            <p>OCR: 0987654321</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row table-row">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width:5%">#</th>
+                                    <th style="width:50%">Produkt</th>
+                                    <th class="text-right" style="width:15%">Antal</th>
+                                    <th class="text-right" style="width:15%">Styckpris</th>
+                                    <th class="text-right" style="width:15%">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (var i = 0; i < Model.ItemQuantities.Count; i++)
+                                {
+                                    int line = i + 1;
+                                    var total = (Model.ItemQuantities[i].Quantity) * (Model.ItemQuantities[i].Item.Price);
+                                    Model.TotalSum += total;
+                                    <tr class="last-row">
+                                        <td class="text-center"> @line</td>
+                                        <td>@Model.ItemQuantities[i].Item.Product</td>
+                                        <td class="text-right">@Model.ItemQuantities[i].Quantity</td>
+                                        <td class="text-right">@Model.ItemQuantities[i].Item.Price kr</td>
+                                        <td class="text-right">@total kr</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="row test">
+                        <div class="col-xs-6 margintop">
+                            <p class="lead marginbottom" id="logo">Tack för din beställning!</p>
+
+                            <button class="btn btn-success" id="invoice-print"><i class="fa fa-print"></i> Skriv Ut</button>
+                            <button class="btn btn-danger"><i class="fa fa-envelope-o"></i> Maila</button>
+                        </div>
+                        <div class="col-xs-6 text-right pull-right invoice-total">
+                            <p>Summa: <span>@Model.TotalSum</span>kr</p>
+                            <p>Leverans: Gratis</p>
+                            <p><strong>Totalsumma: <span>@Model.TotalSum</span>kr</strong></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
