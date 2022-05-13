@@ -10,8 +10,8 @@ using hakimslivs.Data;
 namespace hakimslivs.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220503115811_firstfirst")]
-    partial class firstfirst
+    [Migration("20220513120203_firstAgain")]
+    partial class firstAgain
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -250,6 +250,22 @@ namespace hakimslivs.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("hakimslivs.Models.Category", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Name");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("hakimslivs.Models.Item", b =>
                 {
                     b.Property<int>("ID")
@@ -257,20 +273,21 @@ namespace hakimslivs.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Category")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageURL")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(7,2)");
 
                     b.Property<string>("Product")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -279,11 +296,18 @@ namespace hakimslivs.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("CategoryName");
+
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("hakimslivs.Models.ItemQuantity", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("ItemID")
                         .HasColumnType("int");
 
@@ -292,6 +316,8 @@ namespace hakimslivs.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.HasKey("ID");
 
                     b.HasIndex("ItemID");
 
@@ -334,11 +360,34 @@ namespace hakimslivs.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2(7)");
 
+                    b.Property<int?>("OrderStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("PaymentOk")
+                        .HasColumnType("bit");
+
                     b.HasKey("ID");
 
                     b.HasIndex("AspNetUserId");
 
+                    b.HasIndex("OrderStatusId");
+
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("hakimslivs.Models.OrderStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("OrderStatusName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrdersStatuses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -392,6 +441,15 @@ namespace hakimslivs.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("hakimslivs.Models.Item", b =>
+                {
+                    b.HasOne("hakimslivs.Models.Category", "Category")
+                        .WithMany("Items")
+                        .HasForeignKey("CategoryName");
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("hakimslivs.Models.ItemQuantity", b =>
                 {
                     b.HasOne("hakimslivs.Models.Item", "Item")
@@ -417,7 +475,18 @@ namespace hakimslivs.Migrations
                         .WithMany()
                         .HasForeignKey("AspNetUserId");
 
+                    b.HasOne("hakimslivs.Models.OrderStatus", "OrderStatus")
+                        .WithMany()
+                        .HasForeignKey("OrderStatusId");
+
+                    b.Navigation("OrderStatus");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("hakimslivs.Models.Category", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

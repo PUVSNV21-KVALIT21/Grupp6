@@ -32,7 +32,7 @@ function GetTotalSum(jsonData) {
 function PlaceOrder() {
     var JsonLocalStorageObj = JSON.stringify(localStorage);
     $.ajax({
-        url: "/GetCartItems",
+        url: "/GenerateOrder",
         type: "POST",
         data: JsonLocalStorageObj,
         contentType: "application/json; charset=utf-8",

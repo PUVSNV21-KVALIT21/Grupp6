@@ -57,6 +57,11 @@ namespace hakimslivs.Data
                 .HasIndex(e => e.Name)
                 .IsUnique();
 
+
+            modelBuilder.Entity<ItemQuantity>()
+                .HasKey(i => i.ID);
+
+
         }
     }
 }
