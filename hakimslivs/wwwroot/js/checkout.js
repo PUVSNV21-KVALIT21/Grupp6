@@ -6,6 +6,13 @@
         data: JsonLocalStorageObj,
         contentType: "application/json; charset=utf-8",
         success: function (result) {
+            var json = JSON.parse(result);
+            if (json.length === 0) {
+                document.querySelector(".confirmBtn").disabled = true;
+            }
+            else {
+                document.querySelector(".confirmBtn").disabled = false;
+            }
             GetTotalSum(result);
         },
         error: function (xhr, status, error) {
@@ -13,7 +20,6 @@
         }
     });
 }
-
 window.addEventListener("load", () => {
     LoadCart();
 });
@@ -32,13 +38,12 @@ function GetTotalSum(jsonData) {
 function PlaceOrder() {
     var JsonLocalStorageObj = JSON.stringify(localStorage);
     $.ajax({
-        url: "/GetCartItems",
+        url: "/GenerateOrder",
         type: "POST",
         data: JsonLocalStorageObj,
         contentType: "application/json; charset=utf-8",
         success: function (result) {
             console.log(result);
-            //GetTotalSum(result);
         },
         error: function (xhr, status, error) {
             console.log('Error : ' + xhr.responseText);

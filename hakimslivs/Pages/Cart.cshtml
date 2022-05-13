@@ -111,9 +111,9 @@
 
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <a asp-page="/Checkout" type="button" class="btnBuy btn btn-primary btn-lg btn-block">
+                    <a asp-page="/Checkout" class="link-btn">
 
-                        Beställ
+                        <button type="button" class="btnBuy btn btn-primary btn-lg btn-block">Beställ</button>
                     </a>
                 }
                 else
