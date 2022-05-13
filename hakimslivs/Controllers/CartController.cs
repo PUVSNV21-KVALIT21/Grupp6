@@ -1,7 +1,9 @@
 ﻿using hakimslivs.Data;
 using hakimslivs.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,9 +14,11 @@ namespace hakimslivs.Controllers
     public class CartreadController : Controller
     {
         ApplicationDbContext context;
-        public CartreadController(ApplicationDbContext context)
+        UserManager<ApplicationUser> _userManager;
+        public CartreadController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
+            _userManager = userManager;
         }
 
         [HttpPost]
@@ -37,8 +41,6 @@ namespace hakimslivs.Controllers
         [Route("/GenerateOrder/{json?}")]
         public object GenerateOrder([FromBody] object jObject)
         {
-            // Exempeldata
-            // {"shopping-cart":"{"1":1,"2":1}","i18nextLng":"en-US"}
 
             var success = false;
             var items = new List<CartItems>();
@@ -48,7 +50,16 @@ namespace hakimslivs.Controllers
             {
                 items = GetListWithItems(jObject);
                 //TODO: Spara beställning i databasen
-                
+
+                Order newOrder = new Order();
+                newOrder.OrderDate = DateTime.Now;
+                newOrder.OrderStatus = new OrderStatus { OrderStatusName = "Mottagen" };
+                newOrder.PaymentOk = false;
+                // hur får jag hit user???
+
+                var userID = "61b2aaeb-b723-4224-bb6a-849e7550808c";
+                //IdentityUser = await _userManager.FindByIdAsync(UserID);
+
                 // Om allt gått bra sätt sucess till true och javascriptet
                 // får rensa kundkorgen!
                 success = true;

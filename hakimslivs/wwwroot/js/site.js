@@ -8,9 +8,16 @@ function registerHandlers() {
     for (const addButton of allAddButtons) {
         addButton.onclick = event => {
             let productClicked = addButton.name;
+            var stock = (addButton.title);
             if (shoppingCart.has(productClicked)) {
                 let currentQuantity = shoppingCart.get(productClicked);
-                shoppingCart.set(productClicked, currentQuantity + 1);
+                if (!(currentQuantity >= stock)) {
+                    shoppingCart.set(productClicked, currentQuantity + 1);
+                }
+                else {
+                    addButton.textContent = "Slut"
+                    addButton.disabled = true;
+                }
             }
             else {
                 shoppingCart.set(productClicked, 1);

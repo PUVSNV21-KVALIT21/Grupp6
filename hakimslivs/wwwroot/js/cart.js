@@ -61,7 +61,7 @@ function createCardWithItems(jsonData)
             var unitPrice = holder.querySelector(".unitPrice");
             unitPrice.textContent = json[i].Item.Price + "kr/st";
             var totalUnitPrice = holder.querySelector(".totalUnitPrice");
-            totalUnitPrice.textContent = (json[i].Amount) * (json[i].Item.Price);
+            totalUnitPrice.textContent = (json[i].Amount) * parseFloat(json[i].Item.Price);
             
             var removeBtn = holder.querySelector(".remove-from-cart");
             removeBtn.name = json[i].Item.ID;
@@ -162,7 +162,7 @@ function GetTotalPrice() {
 
     let total = 0;
     for (const input of inputs) {
-        total += parseInt(input.textContent);
+        total += parseFloat(input.textContent);
     };
     return total;
 }
