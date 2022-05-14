@@ -60,12 +60,9 @@ namespace hakimslivs.Controllers
                 var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var customer = await _userManager.FindByIdAsync(userID);
 
-                var tzInfo = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
-                DateTime dateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tzInfo);
-
                 Order newOrder = new Order
                 {
-                    OrderDate = dateTime,
+                    OrderDate = DateTime.UtcNow.AddHours(2),
                     OrderStatus = status,
                     PaymentOk = false,
                     User = customer
