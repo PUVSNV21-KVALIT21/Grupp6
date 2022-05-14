@@ -9,6 +9,12 @@
     <partial name="_SideBarPartial" />
     <div class="justify-content-center col-10">
         <h1 class="text-center">@ViewData["Title"]</h1>
+        <div class="sorting">
+            <form asp-page="Index" method="get">
+                <select asp-for="@Model.Sort" asp-items="Model.Sorting" class="btn dropdown-toggle btn-primary" class="form-control" name="Sort" id="Sort"  onchange="this.form.submit()"></select>
+            </form>
+            </div>
+        
         <div class="product-container">
             @foreach (var item in Model.Items)
             {
@@ -23,7 +29,7 @@
                             }
                             else
                             {
-                                <a asp-page="./Index" asp-route-currentCategory="@item.Category.Name" class="card-text"> <i class="fa @item.Category.Icon"></i>@item.Category.Name</a>
+                                <a asp-page="./Index" asp-route-CurrentCategory="@item.Category.Name" name="CurrentCategory" id="CurrentCategory" class="card-text"> <i class="fa @item.Category.Icon"></i>@item.Category.Name</a>
                             }
                             @if (String.IsNullOrEmpty(item.Description))
                             {
