@@ -77,6 +77,12 @@ body {
     color: #0366d6;
 }
 
+.sorting {
+    display: flex;
+    justify-content: end;
+    padding: 12px;
+}
+
 .product-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
