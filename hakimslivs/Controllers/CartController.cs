@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -42,6 +43,7 @@ namespace hakimslivs.Controllers
         [Route("/GenerateOrder/{json?}")]
         public async Task<object> GenerateOrderAsync([FromBody] object jObject)
         {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             var success = false;
             var items = new List<CartItems>();
 

@@ -10,8 +10,3 @@
     document.querySelector(".date").textContent = todaystring;
     document.querySelector(".date2").textContent = todaystring;
 });
-
-function GetPDF() {
-    var element = document.getElementById('element-to-print');
-    html2pdf(element);
-}
