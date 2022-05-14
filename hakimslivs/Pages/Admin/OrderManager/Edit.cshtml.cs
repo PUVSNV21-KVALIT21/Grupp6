@@ -9,9 +9,12 @@ using Microsoft.EntityFrameworkCore;
 using hakimslivs.Data;
 using hakimslivs.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace hakimslivs.Pages.Admin.OrderManager
 {
+    [Authorize(Roles = "SuperAdmin, Admin")]
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -22,6 +25,8 @@ namespace hakimslivs.Pages.Admin.OrderManager
             _context = context;
             _roleManager = roleManager;
         }
+
+        public List<IdentityRole> Roles { get; set; }
 
         [BindProperty]
         public Order Order { get; set; }
@@ -52,6 +57,8 @@ namespace hakimslivs.Pages.Admin.OrderManager
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            Roles = await _roleManager.Roles.ToListAsync();
+
             if (id == null)
             {
                 return NotFound();
@@ -71,10 +78,12 @@ namespace hakimslivs.Pages.Admin.OrderManager
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(int id, Order order)
         {
+            Roles = await _roleManager.Roles.ToListAsync();
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+
+            await LoadOrderStatuses();
             await LoadOrder(id);
 
             if (!ModelState.IsValid)
@@ -82,6 +91,7 @@ namespace hakimslivs.Pages.Admin.OrderManager
                 return Page();
             }
 
+            Order.PaymentOk = order.PaymentOk;
 
             try
             {
@@ -92,7 +102,33 @@ namespace hakimslivs.Pages.Admin.OrderManager
                 Order.OrderStatus = null;
             }
 
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OrderExists(Order.ID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
             return RedirectToPage("./Index");
+        }
+
+        private bool OrderExists(int id)
+        {
+            return _context.Orders.Any(o => o.ID == id);
         }
     }
 }

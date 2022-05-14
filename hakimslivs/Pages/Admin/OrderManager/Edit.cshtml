@@ -5,9 +5,9 @@
     ViewData["Title"] = "Redigera Order";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1>@ViewData["Title"] #@Model.Order.ID</h1>
 
-<h4>Order</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,18 +21,18 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Order.PaymentOk" /> @Html.DisplayNameFor(model => model.Order.PaymentOk)
+                    <input class="form-check-input" asp-for="Order.PaymentOk" /> Betalning Ok
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Spara" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Tillbaka</a>
 </div>
 
 @section Scripts {

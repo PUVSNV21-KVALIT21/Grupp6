@@ -2,25 +2,25 @@
 @model hakimslivs.Pages.Admin.OrderManager.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Orderlista";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
-<table class="table">
+<table class="table text-center">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderDate)
+                Orderdatum
             </th>
             <th>
-                Customer
+                Kund
             </th>
             <th>
-                Payment Status
+                Betalningsstatus
             </th>
             <th>
-                Order Status
+                Orderstatus
             </th>
             <th></th>
         </tr>
@@ -32,17 +32,17 @@
                 @Html.DisplayFor(modelItem => order.OrderDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => order.User.FirstName) + @Html.DisplayFor(modelItem => order.User.FirstName)
+                @Html.DisplayFor(modelItem => order.User.FirstName) @Html.DisplayFor(modelItem => order.User.LastName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => order.PaymentOk)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => order.OrderStatus)
+                @Html.DisplayFor(modelItem => order.OrderStatus.OrderStatusName)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@order.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@order.ID">Details</a>
+                <a asp-page="./Edit" asp-route-id="@order.ID">Redigera</a> |
+                <a asp-page="./Details" asp-route-id="@order.ID">Detaljer</a>
             </td>
         </tr>
 }

@@ -301,6 +301,11 @@ namespace hakimslivs.Migrations
 
             modelBuilder.Entity("hakimslivs.Models.ItemQuantity", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("ItemID")
                         .HasColumnType("int");
 
@@ -309,6 +314,8 @@ namespace hakimslivs.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.HasKey("ID");
 
                     b.HasIndex("ItemID");
 

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using hakimslivs.Data;
 using hakimslivs.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace hakimslivs.Pages.Admin.OrderManager
 {
+    [Authorize(Roles = "SuperAdmin, Admin")]
     public class DetailsModel : PageModel
     {
         private readonly hakimslivs.Data.ApplicationDbContext _context;
@@ -22,6 +24,7 @@ namespace hakimslivs.Pages.Admin.OrderManager
         public Order Order { get; set; }
         public List<ItemQuantity> ItemQuantityList { get; set; }
         public List<Item> Items { get; set; }
+        public decimal Total { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,6 +36,13 @@ namespace hakimslivs.Pages.Admin.OrderManager
             Order = await _context.Orders.Include(o => o.OrderStatus).FirstOrDefaultAsync(m => m.ID == id);
             ItemQuantityList = await _context.ItemQuantities.Include(iq => iq.Item).Where(iq => iq.OrderID == Order.ID).ToListAsync();
             Items = await _context.Items.ToListAsync();
+
+            Total = 0;
+
+            foreach(var itemQuantity in ItemQuantityList)
+            {
+                Total += itemQuantity.Quantity * itemQuantity.Item.Price;
+            }
 
             if (Order == null)
             {
