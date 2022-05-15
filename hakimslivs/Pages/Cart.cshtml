@@ -15,7 +15,7 @@
                     <h5 class="mb-0">@ViewData["Title"] </h5>
                     <div class="cart-btns">
                         <button id="btnLoad" class="btn" alt="Uppdatera Varukorgen" onclick ="LoadCart()"><i class="fa fa-solid fa-arrows-rotate"></i></button>
-                        <button id="btnEmpty" class="btn" alt="Töm Varukorgen" onclick ="EmptyCart()"><i class="fa fa-trash"></i></i></button>
+                        <button id="btnEmpty" class="btn" alt="Töm Varukorgen" onclick ="EmptyCart()"><i class="fa fa-trash"></i></button>
                     </div>
                 </div>
                 
@@ -64,10 +64,11 @@
                             </div>
                             <!-- Quantity -->
                             <!-- Price -->
-                        <p class="text-start text-md-center">
+                        <div class="text-start text-md-center">
                                 <p class="text-center unitPrice"></p>
                                 <h4 class="text-center"><strong class="totalUnitPrice"></strong><span><strong>kr</strong></span></h4>
-                            </p>
+
+                        </div>
                             <!-- Price -->
                     </div>
                     </div>
@@ -111,15 +112,11 @@
 
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <a asp-page="/Checkout" class="link-btn">
-
-                        <button type="button" class="btnBuy btn btn-primary btn-lg btn-block">Beställ</button>
-                    </a>
+                    <a asp-page="/Checkout" type="button" class="btnBuy btn btn-primary btn-lg btn-block">Beställ</a>
                 }
                 else
                 {
                     <button type="button" class="btnBuy btn btn-primary btn-lg btn-block" disabled="disabled" >
-
                         Beställ
                     </button>
                     <p class="na text-center">Du måste vara inloggad för att beställa</p>
