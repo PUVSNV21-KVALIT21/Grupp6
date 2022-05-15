@@ -138,7 +138,15 @@ body {
     display: inline-flex;
     align-items: center;
 }
-
+.role-form {
+    max-width: 50%;
+}
+.role-group {
+    display: flex;
+}
+.role-group button {
+    margin-left: 6px;
+}
 .cart-btns-header {
     display: flex;
     align-items: center;
