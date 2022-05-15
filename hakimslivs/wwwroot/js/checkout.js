@@ -8,10 +8,10 @@
         success: function (result) {
             var json = JSON.parse(result);
             if (json.length === 0) {
-                document.querySelector(".confirmBtn").disabled = true;
+                document.querySelector(".confirmBtn").classList.add("disabled");
             }
             else {
-                document.querySelector(".confirmBtn").disabled = false;
+                document.querySelector(".confirmBtn").classList.remove("disabled");
             }
             GetTotalSum(result);
         },

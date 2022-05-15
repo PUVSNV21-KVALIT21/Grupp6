@@ -126,7 +126,7 @@ function createCardWithItems(jsonData)
     if (GetTotalAmount() === 0) {
         document.querySelector(".bi-cart").style.color = null;
         document.querySelector("#amount").textContent = "";
-        document.querySelector(".btnBuy").disabled = true;
+        document.querySelector(".btnBuy").classList.add("disabled");
     }
 
     setValue("totalPrice", GetTotalPrice());
