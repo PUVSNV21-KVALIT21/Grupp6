@@ -201,7 +201,26 @@ a.disabled {
 .invoice .last-row {
     border-bottom: 1px solid #ddd;
 }
+.admin-panel {
+    background-color: #1b6ec2 !important;
+    width: 98.5%;
+}
+.admin-panel .nav-link {
+    color: white;
+}
 
+.admin-panel a.nav-link {
+    display: flex;
+    align-content: center;
+}
+
+.admin-title {
+    font-size: 14px;
+    padding-left: 6px;
+}
+.admin-title-title {
+    padding-left: 6px;
+}
 
 @media(max-width:575px) {
     .invoice .top-left, .invoice .top-right, .invoice .payment-details {
@@ -242,6 +261,22 @@ a.disabled {
     .side-menu-name {
         font-size: 12px;
     }
+/*    .admin-panel a.nav-link {
+        display: flex;
+        align-content: center;
+    }
+    .admin-title {
+        font-size: 14px;
+        padding-left: 6px;
+    }*/
+}
+@media(max-width:768px) {
+    #SearchTerm {
+        width: 155px;
+    }
+    .admin-title {
+        display: none;
+    }
 }
 
 /*Breaking point for hamburger menu*/
@@ -260,6 +295,10 @@ a.disabled {
     }
     .side-menu-main .fa {
         font-size: 18px;
+    }
+    .admin-title {
+        display: inline;
+        font-size: 20px;
     }
 }
 
