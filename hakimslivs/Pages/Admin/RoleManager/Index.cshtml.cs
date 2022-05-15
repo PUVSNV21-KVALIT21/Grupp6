@@ -31,7 +31,7 @@ namespace hakimslivs.Pages.Admin.RoleManager
         }
         public async Task<IActionResult> OnPostAsync(IdentityRole role)
         {
-            if (role != null)
+            if (role.Name != null)
             {
                 Role = new IdentityRole
                 {
