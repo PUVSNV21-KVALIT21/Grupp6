@@ -15,10 +15,8 @@ namespace hakimslivs.Pages.Admin.UserRoles
     public class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        public IndexModel(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public IndexModel(UserManager<ApplicationUser> userManager)
         {
-            _roleManager = roleManager;
             _userManager = userManager;
         }
 
