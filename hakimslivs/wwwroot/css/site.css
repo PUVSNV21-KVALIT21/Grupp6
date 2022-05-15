@@ -152,8 +152,8 @@ body {
     margin-top: 20px;
     background: #eee;
 }
-a:hover.link-btn {
-    text-decoration: none;
+a.disabled {
+    pointer-events: none;
 }
 /*Invoice*/
 .test {
