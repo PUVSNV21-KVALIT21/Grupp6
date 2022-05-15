@@ -297,8 +297,7 @@ a.disabled {
         font-size: 18px;
     }
     .admin-title {
-        display: inline;
-        font-size: 20px;
+        display: flex;
     }
 }
 
