@@ -261,14 +261,6 @@ a.disabled {
     .side-menu-name {
         font-size: 12px;
     }
-/*    .admin-panel a.nav-link {
-        display: flex;
-        align-content: center;
-    }
-    .admin-title {
-        font-size: 14px;
-        padding-left: 6px;
-    }*/
 }
 @media(max-width:768px) {
     #SearchTerm {
