@@ -1,6 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@900&family=Caveat&display=swap');
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -77,12 +77,21 @@ body {
     color: #0366d6;
 }
 
+.top h1 {
+    font-family: 'Caveat', cursive;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    color: white;
+    background: #1b6ec2;
+}
 .sorting {
     display: flex;
     justify-content: end;
     padding: 12px;
 }
-
+#Sort {
+    color: #1b6ec2;
+}
 .product-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

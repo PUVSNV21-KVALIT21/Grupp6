@@ -8,13 +8,14 @@
 <div class="row">
     <partial name="_SideBarPartial" />
     <div class="justify-content-center col-10">
-        <h1 class="text-center">@ViewData["Title"]</h1>
+        <div class="top">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+        </div>
         <div class="sorting">
             <form asp-page="Index" method="get">
-                <select asp-for="@Model.Sort" asp-items="Model.Sorting" class="btn btn-primary" class="form-control" name="Sort" id="Sort"  onchange="this.form.submit()"></select>
+                <select asp-for="@Model.Sort" asp-items="Model.Sorting" class="btn btn-light" name="Sort" id="Sort" onchange="this.form.submit()"></select>
             </form>
-            </div>
-        
+        </div>
         <div class="product-container">
             @foreach (var item in Model.Items)
             {
