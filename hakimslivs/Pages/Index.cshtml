@@ -43,15 +43,15 @@
 
                         @if (item.Stock >= 10)
                         {
-                            <p class="card-text">I Lager 🟢</p>
+                            <p class="card-text-@item.ID">I Lager 🟢</p>
                         }
                         else if (item.Stock < 10 && item.Stock > 0)
                         {
-                            <p class="card-text">Få i lager 🟡</p>
+                            <p class="card-text-@item.ID">Få i lager 🟡</p>
                         }
                         else
                         {
-                            <p class="card-text">Slut 🔴</p>
+                            <p class="card-text-@item.ID">Slut 🔴</p>
                         }
 
                         <h5 class="card-title">@item.Price kr</h5>

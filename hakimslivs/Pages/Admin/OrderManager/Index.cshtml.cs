@@ -28,7 +28,7 @@ namespace hakimslivs.Pages.Admin.OrderManager
 
         public async Task OnGetAsync()
         {
-            Order = await _context.Orders.Include(o => o.OrderStatus).Include(o => o.User).ToListAsync();
+            Order = await _context.Orders.Include(o => o.OrderStatus).Include(o => o.User).OrderByDescending(o => o.OrderDate).ToListAsync();
         }
     }
 }
