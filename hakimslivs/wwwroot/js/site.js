@@ -11,12 +11,17 @@ function registerHandlers() {
             var stock = (addButton.title);
             if (shoppingCart.has(productClicked)) {
                 let currentQuantity = shoppingCart.get(productClicked);
+                var className = ".card-text-" + addButton.name;
+
+                if ((stock - currentQuantity) <= 10) {
+                    document.querySelector(className).textContent = "Få i lager 🟡";
+                }
+
                 if (currentQuantity === stock - 1) {
                     shoppingCart.set(productClicked, currentQuantity + 1);
                     addButton.textContent = "Slut"
                     addButton.disabled = true;
 
-                    var className = ".card-text-" + addButton.name;
                     document.querySelector(className).textContent = "Slut 🔴";
                 }
                 else if (!(currentQuantity >= stock)) {
@@ -47,11 +52,15 @@ function disableAddButtons() {
 
     btns.forEach(btn => {
         if (shoppingCart.get(btn.name) !== undefined) {
+            var className = ".card-text-" + btn.name;
+
             if (shoppingCart.get(btn.name) === parseInt(btn.title)) {
+                document.querySelector(className).textContent = "Slut 🔴";
                 btn.textContent = "Slut"
                 btn.disabled = true;
-                var className = ".card-text-" + btn.name;
-                document.querySelector(className).textContent = "Slut 🔴";
+            }
+            else if ((parseInt(btn.title) - shoppingCart.get(btn.name)) < 10) {
+                document.querySelector(className).textContent = "Få i lager 🟡";
             }
         }
     });
