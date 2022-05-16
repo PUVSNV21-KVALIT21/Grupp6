@@ -2,7 +2,7 @@
 @model hakimslivs.Pages.Admin.OrderManager.DetailsModel
 
 @{
-    ViewData["Title"] = "Detaljer";
+    ViewData["Title"] = "Orderdetaljer";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -21,6 +21,12 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Order.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            Kund
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.User.FirstName) @Html.DisplayFor(model => model.Order.User.LastName)
         </dd>
         <dt class="col-sm-2">
             Betalningsstatus
