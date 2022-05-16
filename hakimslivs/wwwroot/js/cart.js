@@ -171,8 +171,11 @@ function GetTotalPrice() {
 }
 
 function EmptyCart() {
-    localStorage.clear();
-    LoadCart();
+    var empty = confirm("Är du säker på att du vill tömma din varukorg?");
+    if (empty) {
+        localStorage.clear();
+        LoadCart();
+    }
 }
 
 // these are repeats from site.js :((
