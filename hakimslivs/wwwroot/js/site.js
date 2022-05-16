@@ -11,12 +11,22 @@ function registerHandlers() {
             var stock = (addButton.title);
             if (shoppingCart.has(productClicked)) {
                 let currentQuantity = shoppingCart.get(productClicked);
-                if (!(currentQuantity >= stock)) {
+                if (currentQuantity === stock - 1) {
+                    shoppingCart.set(productClicked, currentQuantity + 1);
+                    addButton.textContent = "Slut"
+                    addButton.disabled = true;
+
+                    var className = ".card-text-" + addButton.name;
+                    document.querySelector(className).textContent = "Slut 🔴";
+                }
+                else if (!(currentQuantity >= stock)) {
                     shoppingCart.set(productClicked, currentQuantity + 1);
                 }
                 else {
                     addButton.textContent = "Slut"
                     addButton.disabled = true;
+                    var className = ".card-text-" + addButton.name;
+                    document.querySelector(className).textContent = "Slut 🔴";
                 }
             }
             else {
@@ -28,6 +38,24 @@ function registerHandlers() {
         }
     }
 };
+
+window.addEventListener("load", () => {
+    disableAddButtons();
+});
+function disableAddButtons() {
+    var btns = document.querySelectorAll(".add-to-cart");
+
+    btns.forEach(btn => {
+        if (shoppingCart.get(btn.name) !== undefined) {
+            if (shoppingCart.get(btn.name) === parseInt(btn.title)) {
+                btn.textContent = "Slut"
+                btn.disabled = true;
+                var className = ".card-text-" + btn.name;
+                document.querySelector(className).textContent = "Slut 🔴";
+            }
+        }
+    });
+}
 
 function writeLocalStorage() {
     localStorage.setItem('shopping-cart', JSON.stringify(Object.fromEntries(shoppingCart)));
