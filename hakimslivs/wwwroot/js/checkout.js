@@ -32,7 +32,7 @@ function GetTotalSum(jsonData) {
     for (var i = 0; i < json.length; i++) {
         total += (json[i].Amount) * (json[i].Item.Price)
     }
-    container.textContent = total + "kr";
+    container.textContent = parseFloat(total).toFixed(2) + " kr";
 }
 
 function PlaceOrder() {
