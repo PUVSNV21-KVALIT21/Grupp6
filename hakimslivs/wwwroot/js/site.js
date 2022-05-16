@@ -21,7 +21,7 @@ function registerHandlers() {
                     shoppingCart.set(productClicked, currentQuantity + 1);
                     addButton.textContent = "Slut"
                     addButton.disabled = true;
-
+                    addButton.classList.remove("buy-btn");
                     document.querySelector(className).textContent = "Slut 🔴";
                 }
                 else if (!(currentQuantity >= stock)) {
@@ -58,6 +58,7 @@ function disableAddButtons() {
                 document.querySelector(className).textContent = "Slut 🔴";
                 btn.textContent = "Slut"
                 btn.disabled = true;
+                btn.classList.remove("buy-btn");
             }
             else if ((parseInt(btn.title) - shoppingCart.get(btn.name)) < 10) {
                 document.querySelector(className).textContent = "Få i lager 🟡";
