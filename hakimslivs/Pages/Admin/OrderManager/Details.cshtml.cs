@@ -33,7 +33,7 @@ namespace hakimslivs.Pages.Admin.OrderManager
                 return NotFound();
             }
 
-            Order = await _context.Orders.Include(o => o.OrderStatus).FirstOrDefaultAsync(m => m.ID == id);
+            Order = await _context.Orders.Include(o => o.OrderStatus).Include(o => o.User).FirstOrDefaultAsync(m => m.ID == id);
             ItemQuantityList = await _context.ItemQuantities.Include(iq => iq.Item).Where(iq => iq.OrderID == Order.ID).ToListAsync();
             Items = await _context.Items.ToListAsync();
 
