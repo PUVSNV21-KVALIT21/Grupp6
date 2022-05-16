@@ -41,8 +41,8 @@
                 @Html.DisplayFor(modelItem => order.OrderStatus.OrderStatusName)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@order.ID">Redigera</a> |
-                <a asp-page="./Details" asp-route-id="@order.ID">Detaljer</a>
+                <a asp-page="./Edit" asp-route-id="@order.ID" class="btn btn-primary">Redigera</a>
+                <a asp-page="./Details" asp-route-id="@order.ID" class="btn btn-info">Detaljer</a>
             </td>
         </tr>
 }
