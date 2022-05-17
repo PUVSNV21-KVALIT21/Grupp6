@@ -36,8 +36,11 @@ namespace hakimslivs.Pages
             var UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             IdentityUser = await _userManager.FindByIdAsync(UserID);
             Thread.Sleep(5000);
-            Order = _context.Orders.Include(o => o.User).Where(o => o.User == IdentityUser).OrderByDescending(o => o.OrderDate).First();
-            if (Order == null)
+            try
+            {
+                Order = _context.Orders.Include(o => o.User).Where(o => o.User == IdentityUser).OrderByDescending(o => o.OrderDate).First();
+            }
+            catch
             {
                 return NotFound();
             }

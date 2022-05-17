@@ -1,10 +1,10 @@
 ﻿@page
+@using System.Globalization
 @model hakimslivs.Pages.InvoiceModel
 
 @{
 }
 
-<script src="~/js/invoice.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <div id="element-to-print" class="container bootstrap snippets bootdeys">
@@ -20,7 +20,8 @@
 
                         <div class="col-sm-6 top-right">
                             <h3 class="marginright">Faktura</h3>
-                            <span class="marginright date"></span>
+                            @{ CultureInfo ci = new CultureInfo("sv-SE"); }
+                            <span class="marginright">@Model.Order.OrderDate.ToString("dd MMMM yyyy", ci)</span>
                         </div>
 
                     </div>
@@ -56,7 +57,7 @@
 
                         <div class="col-xs-4 text-right payment-details">
                             <p class="lead marginbottom payment-info">Betalningsuppgifter</p>
-                            <p>Datum: <span class="date2"></span></p>
+                            <p>Datum: <span>@Model.Order.OrderDate.ToString("dd/MM/yyyy HH:mm:ss")</span></p>
                             <p>Bankgiro: 1234-567 </p>
                             <p>OCR: 0987654321</p>
                         </div>
