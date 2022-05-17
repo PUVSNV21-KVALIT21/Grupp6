@@ -80,6 +80,9 @@ namespace hakimslivs.Controllers
                         Quantity = item.Amount
                     };
                     context.ItemQuantities.Add(iq);
+
+                    var item2Change = context.Items.Find(item.Item.ID);
+                    item2Change.Stock -= iq.Quantity;
                 }
                 await context.SaveChangesAsync();
                 success = true;
