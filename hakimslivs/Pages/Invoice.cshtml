@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int}"
 @using System.Globalization
 @model hakimslivs.Pages.InvoiceModel
 
@@ -38,20 +38,20 @@
                         </div>
 
                         <div class="col-xs-4 to">
-                            <p class="lead marginbottom payment-info">Till: <span>@Model.IdentityUser.FirstName @Model.IdentityUser.LastName</span></p>
-                            <p>@Model.IdentityUser.Street @Model.IdentityUser.StreetNumber</p>
-                            <p>@Model.IdentityUser.PostalCode, @Model.IdentityUser.City</p>
+                            <p class="lead marginbottom payment-info">Till: <span>@Model.Order.User.FirstName @Model.Order.User.LastName</span></p>
+                            <p>@Model.Order.User.Street @Model.Order.User.StreetNumber</p>
+                            <p>@Model.Order.User.PostalCode, @Model.Order.User.City</p>
                             <p>Sverige</p>
-                            @if (@Model.IdentityUser.PhoneNumber == null)
+                            @if (@Model.Order.User.PhoneNumber == null)
                             {
                                 <p>Telefon: <span class="na">Inte tillgängligt</span></p>
                             }
                             else
                             {
-                                <p>Telefon: @Model.IdentityUser.PhoneNumber</p>
+                                <p>Telefon: @Model.Order.User.PhoneNumber</p>
                             }
 
-                            <p>Email: <span>@Model.IdentityUser.Email</span></p>
+                            <p>Email: <span>@Model.Order.User.Email</span></p>
 
                         </div>
 

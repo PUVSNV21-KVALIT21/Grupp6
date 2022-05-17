@@ -43,10 +43,15 @@ function PlaceOrder() {
         data: JsonLocalStorageObj,
         contentType: "application/json; charset=utf-8",
         success: function (result) {
-            console.log(result);
+            var newPath = "/Invoice/" + result;
+            window.location.pathname = newPath;
         },
         error: function (xhr, status, error) {
             console.log('Error : ' + xhr.responseText);
         }
     });
+
+    localStorage.clear();
+    document.querySelector(".bi-cart").style.color = null;
+    document.querySelector("#amount").textContent = "";
 }

@@ -46,6 +46,7 @@ namespace hakimslivs.Controllers
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             var success = false;
             var items = new List<CartItems>();
+            int orderID = 0;
 
             if (jObject != null)
             {
@@ -67,7 +68,7 @@ namespace hakimslivs.Controllers
                     PaymentOk = false,
                     User = customer
                 };
-
+                
                 context.Orders.Add(newOrder);
                 await context.SaveChangesAsync();
 
@@ -86,9 +87,10 @@ namespace hakimslivs.Controllers
                 }
                 await context.SaveChangesAsync();
                 success = true;
+                orderID = newOrder.ID;
             }
 
-            return JsonConvert.SerializeObject(success);
+            return JsonConvert.SerializeObject(orderID);
         }
 
         private List<CartItems> GetListWithItems(object jObject)
