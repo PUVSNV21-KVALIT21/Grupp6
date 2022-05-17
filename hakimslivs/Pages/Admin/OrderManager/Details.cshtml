@@ -90,7 +90,8 @@
 </table>
 </div>
 <div>
-    <button class="btn btn-success" onclick="window.print();return false;" id="invoice-print"><i class="fa fa-print"></i> Skriv Ut</button>
+    <a href="~/Invoice/@Model.Order.ID" type="button" class="btn btn-info"><i class="fa fa-print"></i> Faktura</a>
+    <button class="btn btn-success" onclick="window.print();return false;" id="invoice-print"><i class="fa fa-print"></i> Plocklista</button>
     <a asp-page="./Edit" asp-route-id="@Model.Order.ID" class="btn btn-primary">Redigera</a>
     <a asp-page="./Index" class="btn btn-info">Tillbaka</a>
 </div>
