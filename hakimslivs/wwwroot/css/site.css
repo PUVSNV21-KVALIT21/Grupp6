@@ -152,7 +152,10 @@ body {
 .form-price .form-group:first-child {
     padding-right: 4px;
 }
-
+input[type="checkbox"] {
+    height: 1rem;
+    width: 1rem;
+}
 .fa {
     min-width: 20px;
 }
