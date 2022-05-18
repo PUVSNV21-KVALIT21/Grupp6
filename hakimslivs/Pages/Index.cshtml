@@ -2,13 +2,20 @@
 @model hakimslivs.Pages.IndexModel
 
 @{
-    ViewData["Title"] = "Välkommen till Hakims Livs!";
+    ViewData["Title"] = "Välkommen till Hakim Livs!";
 }
 
 <div class="row">
     <partial name="_SideBarPartial" />
     <div class="justify-content-center col-10">
-        <h1 class="text-center">@ViewData["Title"]</h1>
+        <div class="top">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+        </div>
+        <div class="sorting">
+            <form asp-page="Index" method="get">
+                <select asp-for="@Model.Sort" asp-items="Model.Sorting" class="btn btn-light" name="Sort" id="Sort" onchange="this.form.submit()"></select>
+            </form>
+        </div>
         <div class="product-container">
             @foreach (var item in Model.Items)
             {
@@ -23,7 +30,7 @@
                             }
                             else
                             {
-                                <a asp-page="./Index" asp-route-currentCategory="@item.Category.Name" class="card-text"> <i class="fa @item.Category.Icon"></i>@item.Category.Name</a>
+                                <a asp-page="./Index" asp-route-CurrentCategory="@item.Category.Name" name="CurrentCategory" id="CurrentCategory" class="card-text"> <i class="fa @item.Category.Icon"></i>@item.Category.Name</a>
                             }
                             @if (String.IsNullOrEmpty(item.Description))
                             {
@@ -37,15 +44,15 @@
 
                         @if (item.Stock >= 10)
                         {
-                            <p class="card-text">I Lager 🟢</p>
+                            <p class="card-text-@item.ID">I Lager 🟢</p>
                         }
                         else if (item.Stock < 10 && item.Stock > 0)
                         {
-                            <p class="card-text">Få i lager 🟡</p>
+                            <p class="card-text-@item.ID">Få i lager 🟡</p>
                         }
                         else
                         {
-                            <p class="card-text">Slut 🔴</p>
+                            <p class="card-text-@item.ID">Slut 🔴</p>
                         }
 
                         <h5 class="card-title">@item.Price kr</h5>
@@ -56,7 +63,7 @@
                     }
                     else
                     {
-                        <button class="btn btn-primary add-to-cart" name=@item.Product>Köp</button>
+                        <button class="btn btn-primary add-to-cart buy-btn @item.Stock" title="@item.Stock" name="@item.ID">Köp</button>
                     }
 
                 </div>

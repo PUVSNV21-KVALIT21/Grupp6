@@ -301,6 +301,11 @@ namespace hakimslivs.Migrations
 
             modelBuilder.Entity("hakimslivs.Models.ItemQuantity", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("ItemID")
                         .HasColumnType("int");
 
@@ -309,6 +314,8 @@ namespace hakimslivs.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.HasKey("ID");
 
                     b.HasIndex("ItemID");
 
@@ -351,11 +358,34 @@ namespace hakimslivs.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2(7)");
 
+                    b.Property<int?>("OrderStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("PaymentOk")
+                        .HasColumnType("bit");
+
                     b.HasKey("ID");
 
                     b.HasIndex("AspNetUserId");
 
+                    b.HasIndex("OrderStatusId");
+
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("hakimslivs.Models.OrderStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("OrderStatusName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrdersStatuses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -442,6 +472,12 @@ namespace hakimslivs.Migrations
                     b.HasOne("hakimslivs.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("AspNetUserId");
+
+                    b.HasOne("hakimslivs.Models.OrderStatus", "OrderStatus")
+                        .WithMany()
+                        .HasForeignKey("OrderStatusId");
+
+                    b.Navigation("OrderStatus");
 
                     b.Navigation("User");
                 });

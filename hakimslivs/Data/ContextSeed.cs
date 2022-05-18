@@ -157,5 +157,32 @@ namespace hakimslivs.Data
                 }
             }
         }
+
+        public static Task InitializeOrderStatusAsync(ApplicationDbContext database)
+        {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            if (database.OrdersStatuses.Any())
+            {
+                return Task.CompletedTask;
+            }
+
+            if (!database.OrdersStatuses.Any())
+            {
+                string[] orderstatusLines = File.ReadAllLines("Data/OrderStatuses.csv", Encoding.GetEncoding("ISO-8859-1")).Skip(1).ToArray();
+                foreach (var ordersStatus in orderstatusLines)
+                {
+                    string[] parts = ordersStatus.Split(';');
+                    OrderStatus os = new OrderStatus
+                    {
+                        OrderStatusName = parts[0]
+                    };
+                    database.OrdersStatuses.Add(os);
+                }
+
+                database.SaveChanges();
+            }
+
+            return Task.CompletedTask;
+        }
     }
 }

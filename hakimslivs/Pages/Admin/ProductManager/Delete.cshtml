@@ -8,7 +8,11 @@
 <h1>@ViewData["Title"]</h1>
 
 <div>
+    <div class="alert alert-danger" role="alert">
     <h4>Är du säker på att du vill ta bort den här produkten?</h4>
+    Data om produkten och ordrar som innehåller produkten går förlorade.
+    </div>
+
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -59,7 +63,7 @@
     
     <form method="post">
         <input type="hidden" asp-for="Item.ID" />
-        <input type="submit" value="Ta bort" class="btn btn-danger" /> |
-        <a asp-page="./Index">Tillbaka</a>
+        <input type="submit" value="Ta bort" class="btn btn-danger" />
+        <a asp-page="./Index" class="btn btn-info">Tillbaka</a>
     </form>
 </div>
