@@ -1,6 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@900&family=Caveat&display=swap');
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -77,12 +77,21 @@ body {
     color: #0366d6;
 }
 
+.top h1 {
+    font-family: 'Caveat', cursive;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    color: white;
+    background: #1b6ec2;
+}
 .sorting {
     display: flex;
     justify-content: end;
     padding: 12px;
 }
-
+#Sort {
+    color: #1b6ec2;
+}
 .product-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -104,6 +113,36 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 16px 16px;
 }
+.buy-btn {
+    position: relative;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+.buy-btn:after {
+    content: "";
+    background: #5ca4ed;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+.buy-btn:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
 .product-manager {
     padding-bottom: 12px;
 }
@@ -113,7 +152,10 @@ body {
 .form-price .form-group:first-child {
     padding-right: 4px;
 }
-
+input[type="checkbox"] {
+    height: 1rem;
+    width: 1rem;
+}
 .fa {
     min-width: 20px;
 }

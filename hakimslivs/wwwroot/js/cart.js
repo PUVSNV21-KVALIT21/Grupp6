@@ -59,9 +59,9 @@ function createCardWithItems(jsonData)
             holder.querySelector(".plus").name = json[i].Item.ID;;
 
             var unitPrice = holder.querySelector(".unitPrice");
-            unitPrice.textContent = json[i].Item.Price + "kr/st";
+            unitPrice.textContent = parseFloat(json[i].Item.Price).toFixed(2) + " kr/st";
             var totalUnitPrice = holder.querySelector(".totalUnitPrice");
-            totalUnitPrice.textContent = (json[i].Amount) * parseFloat(json[i].Item.Price);
+            totalUnitPrice.textContent = parseFloat((json[i].Amount) * parseFloat(json[i].Item.Price)).toFixed(2);
             
             var removeBtn = holder.querySelector(".remove-from-cart");
             removeBtn.name = json[i].Item.ID;
@@ -164,12 +164,18 @@ function GetTotalPrice() {
     for (const input of inputs) {
         total += parseFloat(input.textContent);
     };
+
+    total = parseFloat(total).toFixed(2);
+
     return total;
 }
 
 function EmptyCart() {
-    localStorage.clear();
-    LoadCart();
+    var empty = confirm("Är du säker på att du vill tömma din varukorg?");
+    if (empty) {
+        localStorage.clear();
+        LoadCart();
+    }
 }
 
 // these are repeats from site.js :((

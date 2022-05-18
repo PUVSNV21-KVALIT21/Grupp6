@@ -11,12 +11,27 @@ function registerHandlers() {
             var stock = (addButton.title);
             if (shoppingCart.has(productClicked)) {
                 let currentQuantity = shoppingCart.get(productClicked);
-                if (!(currentQuantity >= stock)) {
+                var className = ".card-text-" + addButton.name;
+
+                if ((stock - currentQuantity) <= 10) {
+                    document.querySelector(className).textContent = "Få i lager 🟡";
+                }
+
+                if (currentQuantity === stock - 1) {
+                    shoppingCart.set(productClicked, currentQuantity + 1);
+                    addButton.textContent = "Slut"
+                    addButton.disabled = true;
+                    addButton.classList.remove("buy-btn");
+                    document.querySelector(className).textContent = "Slut 🔴";
+                }
+                else if (!(currentQuantity >= stock)) {
                     shoppingCart.set(productClicked, currentQuantity + 1);
                 }
                 else {
                     addButton.textContent = "Slut"
                     addButton.disabled = true;
+                    var className = ".card-text-" + addButton.name;
+                    document.querySelector(className).textContent = "Slut 🔴";
                 }
             }
             else {
@@ -28,6 +43,29 @@ function registerHandlers() {
         }
     }
 };
+
+window.addEventListener("load", () => {
+    disableAddButtons();
+});
+function disableAddButtons() {
+    var btns = document.querySelectorAll(".add-to-cart");
+
+    btns.forEach(btn => {
+        if (shoppingCart.get(btn.name) !== undefined) {
+            var className = ".card-text-" + btn.name;
+
+            if (shoppingCart.get(btn.name) === parseInt(btn.title)) {
+                document.querySelector(className).textContent = "Slut 🔴";
+                btn.textContent = "Slut"
+                btn.disabled = true;
+                btn.classList.remove("buy-btn");
+            }
+            else if ((parseInt(btn.title) - shoppingCart.get(btn.name)) < 10) {
+                document.querySelector(className).textContent = "Få i lager 🟡";
+            }
+        }
+    });
+}
 
 function writeLocalStorage() {
     localStorage.setItem('shopping-cart', JSON.stringify(Object.fromEntries(shoppingCart)));
